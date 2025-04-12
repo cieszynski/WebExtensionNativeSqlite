@@ -1,0 +1,9 @@
+{
+  "name": "de.cieszynski.nativesqlite",
+  "description": "TODO: place this file at ~/.config/chromium/NativeMessagingHosts",
+  "path": "/home/stephan/GitHub/WebExtensionNativeSqlite/linux/chromium/host.compiled",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://jbncdfgodfclpbhhnbgcbkhfipkggiid/"
+  ]
+}
