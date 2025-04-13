@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --user-data-dir="C:\Users\Quickemu\Documents\GitHub\WebExtensionNativeSqlite\windows\edge\debug_profile" --enable-logging

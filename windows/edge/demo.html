@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--    
+    This file is part of WebExtensionNativeSqlite by Stephan Cieszynski 2025.
+
+    WebExtensionNativeSqlite is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    WebExtensionNativeSqlite is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with WebExtensionNativeSqlite.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<head>
+    <title>Native Sqlite Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        textarea {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 200px
+        }
+    </style>
+    <script>
+        const json1 = JSON.stringify({
+            ref: "ref1",
+            all: {
+                sql: "SELECT *FROM user WHERE id < ?;",
+                args: [10]
+            }
+        }, null, 4);
+
+        const json2 = JSON.stringify({
+            ref: "ref2",
+            get: {
+                sql: "SELECT *FROM user WHERE firstname=:firstname AND lastname=:lastname;",
+                args: {
+                    firstname: "Stephan",
+                    lastname: "Cieszynski"
+                }
+            }
+        }, null, 4);
+
+        const json3 = JSON.stringify({
+            ref: "ref3",
+            run: {
+                sql: "INSERT INTO user (firstname, lastname) VALUES (:firstname, :lastname)",
+                args: {
+                    firstname: "Walt",
+                    lastname: "Disney"
+                }
+            }
+        }, null, 4);
+    </script>
+</head>
+
+<body>
+    <button onclick="text1.value=json1">all</button>
+    <button onclick="text1.value=json2">get</button>
+    <button onclick="text1.value=json3">run</button>
+    <label>Input:<br>
+        <textarea id="text1"></textarea>
+    </label>
+    <button id="button">query</button>
+    <hr>
+    <label>Status:
+        <output id="out1"></output>
+    </label>
+    <hr>
+    <label>Result:<br>
+        <textarea id="text2"></textarea>
+    </label>
+    <script>
+        if (window.chrome && window.chrome.runtime) {
+            out1.value = ('runtime found');
+
+            const port = chrome.runtime.connect(
+                /* TODO: change th ID */
+                "hmoejjfpiekljeniihnagkmpfamlkkkn"
+            )
+
+            port.onMessage.addListener((msg, port) => {
+                text2.textContent = JSON.stringify(msg, null, 4);
+            });
+
+            port.onDisconnect.addListener(function () {
+                out1.value = ('disconnected');
+            });
+
+            button.onclick = (e) => {
+                port.postMessage(JSON.parse(text1.value));
+            }
+        } else {
+            out1.value = ('no runtime found');
+        }
+    </script>
+</body>
+
+</html>

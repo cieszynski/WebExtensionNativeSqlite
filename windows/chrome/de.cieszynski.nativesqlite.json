@@ -1,0 +1,9 @@
+{
+  "name": "de.cieszynski.nativesqlite",
+  "description": "TODO: place the path to this file in registry \\HKEY_CURRENT_USER\\Software\\Microsoft\\Edge\\NativeMessagingHosts\\de.cieszynski.nativesqlite",
+  "path": "C:\\Users\\Quickemu\\Documents\\GitHub\\WebExtensionNativeSqlite\\windows\\denohost.exe",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://mipgokaklngehkkpejoobgjaoaoklekp/"
+  ]
+}
