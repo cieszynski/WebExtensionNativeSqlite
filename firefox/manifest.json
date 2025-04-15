@@ -4,7 +4,11 @@
   "name": "Native messaging example",
   "version": "1.0",
   "icons": {
-    "48": "icons/message.svg"
+    "16": "icons/webextension.svg",
+    "32": "icons/webextension.svg",
+    "48": "icons/webextension.svg",
+    "96": "icons/webextension.svg",
+    "128": "icons/webextension.svg"
   },
   "browser_specific_settings": {
     "gecko": {
