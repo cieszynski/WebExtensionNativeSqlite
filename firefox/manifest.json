@@ -1,0 +1,32 @@
+{
+  "description": "Native messaging example add-on",
+  "manifest_version": 3,
+  "name": "Native messaging example",
+  "version": "1.0",
+  "icons": {
+    "48": "icons/message.svg"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "nativesqlite@cieszynski.de"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts":[
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "nativeMessaging"
+  ]
+}

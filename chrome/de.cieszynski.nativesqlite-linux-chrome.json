@@ -1,0 +1,9 @@
+{
+  "name": "de.cieszynski.nativesqlite",
+  "description": "TODO: link to this file at ~/.config/chromium/NativeMessagingHosts/de.cieszynski.nativesqlite.json",
+  "path": "/home/stephan/GitHub/WebExtensionNativeSqlite/denohost.bin",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://pclabbnfkafcnbidmpijlenbofbldenh/"
+  ]
+}

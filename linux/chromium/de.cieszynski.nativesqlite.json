@@ -1,7 +1,7 @@
 {
   "name": "de.cieszynski.nativesqlite",
   "description": "TODO: link to this file at ~/.config/chromium/NativeMessagingHosts",
-  "path": "/home/stephan/GitHub/WebExtensionNativeSqlite/denohost.bin",
+  "path": "/home/stephan/GitHub/WebExtensionNativeSqlite/linux/firefox/denohost.mjs",
   "type": "stdio",
   "allowed_origins": [
     "chrome-extension://jbncdfgodfclpbhhnbgcbkhfipkggiid/"
