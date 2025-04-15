@@ -21,19 +21,17 @@ nativeport.onDisconnect.addListener(function (data) {
 });
 
 browser.runtime.onConnect.addListener((port) => {
-    console.log("background:onConnect");
+    console.debug("background:onConnect");
 
     port.onDisconnect.addListener((data) => {
-        console.log("background:port.onDisconnect " + JSON.stringify(data))
+        console.error("background:port.onDisconnect " + JSON.stringify(data))
     })
 
-    port.onMessage.addListener((msg) => {
-        console.log("background:port.onMessage")
-        nativeport.postMessage(msg)
+    port.onMessage.addListener((data) => {
+        nativeport.postMessage(data)
     })
 
-    nativeport.onMessage.addListener((msg) => {
-        console.log("background:nativeport.onMessage")
-        port.postMessage(msg)
+    nativeport.onMessage.addListener((data) => {
+        port.postMessage(data)
     });
 });

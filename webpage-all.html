@@ -18,7 +18,7 @@
 -->
 
 <head>
-    <title>Native Sqlite Demo</title>
+    <title>Demo WebExtensionNativeSqlite</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -60,9 +60,12 @@
             }
         }, null, 4);
     </script>
+    <native-sqliteconnector id="nsc" />
 </head>
 
 <body>
+    <h1>Demo WebExtensionNativeSqlite</h1>
+    <p>This demo uses background.js and content.js to communicate with sqlite - so it should work with firefox and chromium/chrome/edge.</p>
     <button onclick="text1.value=json1">all</button>
     <button onclick="text1.value=json2">get</button>
     <button onclick="text1.value=json3">run</button>
@@ -79,35 +82,21 @@
         <textarea id="text2"></textarea>
     </label>
     <script>
-        if (window.chrome && window.chrome.runtime) {
-            out1.value = ('runtime found');
+        // The usual way is to use window.postMessage().
+        // Here, we send and receive "CustomEvent"s
+        // as an another way to communicate with the extension:
 
-            const port = chrome.runtime.connect(
-                /* TODO: change th ID */
-                "pbeppkmlfknfmahldlanamgkpmigcehn"
-            )
+        document.addEventListener('from-nsc', (event) => {
+            // event.detail is always a string -
+            // see https://stackoverflow.com/a/79246157 
+            text2.textContent = event.detail;
+        });
 
-            port.onMessage.addListener((msg, port) => {
-                text2.textContent = JSON.stringify(msg, null, 4);
-            });
-
-            port.onDisconnect.addListener(function () {
-                out1.value = ('disconnected');
-            });
-
-            button.onclick = (e) => {
-                port.postMessage(JSON.parse(text1.value));
-            }
-        } else {
-            // Firefox
-            window.addEventListener('message', (event) => {
-                console.log("window:addEventListener");
-                console.log(JSON.stringify(event.data));
-            });
-
-            button.onclick = (event) => {
-                window.postMessage(JSON.parse(text1.value));
-            }
+        button.onclick = (event) => {
+            document.dispatchEvent(new CustomEvent("to-nsc", {
+                // detail: JSON.parse(text1.value) or 
+                detail: text1.value
+            }))
         }
     </script>
 </body>

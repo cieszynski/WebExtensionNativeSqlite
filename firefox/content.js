@@ -17,20 +17,21 @@
 
 // show, that the extension was loaded ...
 document.body.style.border = "5px solid blue";
+document.getElementById('out1').value = ('runtime found');
 
-const out1 = document.getElementById('out1');
-const text2 = document.getElementById('text2');
-out1.value = "runtime found"
+const backport = browser.runtime.connect({ name: "backport" });
 
-const myPort = browser.runtime.connect({ name: "port-from-cs" });
-myPort.onMessage.addListener((msg) => {
-    console.log("content:myPort.onMessage");
-    text2.value = JSON.stringify(msg)
-   // self.postMessage(msg)
+backport.onMessage.addListener((data) => {
+    document.dispatchEvent(new CustomEvent("from-nsc", {
+        //  detail must be a string -
+        //  see https://stackoverflow.com/a/79246157
+        detail: JSON.stringify(data)
+    }))
 });
 
-self.addEventListener("message", (event) => {
-    console.log("content:self.addEventListener");
-    console.debug(event)
-    myPort.postMessage(event.data);
+document.addEventListener("to-nsc", (event) => {
+    backport.postMessage((typeof event.detail!=='object') 
+        ? JSON.parse(event.detail) 
+        : event.detail
+    );
 });

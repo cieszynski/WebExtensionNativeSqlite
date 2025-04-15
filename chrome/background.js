@@ -14,24 +14,24 @@
     You should have received a copy of the GNU General Public License
     along with WebExtensionNativeSqlite.  If not, see <http://www.gnu.org/licenses/>.
 */
+const nativeport = chrome.runtime.connectNative("de.cieszynski.nativesqlite")
 
-chrome.runtime.onConnectExternal.addListener((port) => {
+nativeport.onDisconnect.addListener(function (data) {
+    console.error('background:nativeport Disconnected ' + JSON.stringify(data));
+});
 
-    let nativeport = chrome.runtime.connectNative("de.cieszynski.nativesqlite");
+chrome.runtime.onConnect.addListener((port) => {
+    console.debug("background:onConnect");
 
-    nativeport.onDisconnect.addListener(function () {
-        console.log('nativeport Disconnected');
+    port.onDisconnect.addListener((data) => {
+        console.error("background:port.onDisconnect " + JSON.stringify(data))
+    })
+
+    port.onMessage.addListener((data) => {
+        nativeport.postMessage(data)
+    })
+
+    nativeport.onMessage.addListener((data) => {
+        port.postMessage(data)
     });
-
-    nativeport.onMessage.addListener((msg) => {
-        port.postMessage(msg);
-    });
-
-    port.onMessage.addListener((msg, port) => {
-        nativeport.postMessage(msg);
-    });
-
-    port.onDisconnect.addListener(() => {
-        console.log('port Disconnected');
-    });
-})
+});
