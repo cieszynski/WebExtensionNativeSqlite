@@ -1,6 +1,6 @@
 {
   "name": "de.cieszynski.nativesqlite",
-  "description": "TODO: link to this file at ~/.mozilla/native-messaging-hosts/de.cieszynski.nativesqlite.json",
+  "description": "TODO: place a link to this file at ~/.mozilla/native-messaging-hosts/de.cieszynski.nativesqlite.json",
   "path": "/home/stephan/GitHub/WebExtensionNativeSqlite/denohost.mjs",
   "type": "stdio",
   "allowed_extensions": [ "nativesqlite@cieszynski.de" ]

@@ -5,6 +5,10 @@ https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/developer-g
 
 https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging
 
+### on linux
 deno compile --allow-all --target x86_64-unknown-linux-gnu -o denohost.bin ./denohost.mjs
 
 deno compile --allow-all --target x86_64-pc-windows-msvc --icon ./icons/webextension.ico -o denohost.exe ./denohost.mjs
+
+### on windows
+deno.exe compile --allow-all -o .\denohost.exe --icon .\webextension.ico .\denohost.mjs

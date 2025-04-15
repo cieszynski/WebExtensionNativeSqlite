@@ -1,1 +1,0 @@
-deno compile --allow-all -o host.compiled ./host.mjs

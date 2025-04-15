@@ -1,4 +1,8 @@
 # Troubleshooting:
+## Debugging:
+start chrome --enable-logging=stderr
+chromium --enable-logging=stderr
+
 ## Access to the specified native messaging host is forbidden:
 
 const port = chrome.runtime.connect(

@@ -84,7 +84,7 @@
 
             const port = chrome.runtime.connect(
                 /* TODO: change th ID */
-                "pclabbnfkafcnbidmpijlenbofbldenh"
+                "pbeppkmlfknfmahldlanamgkpmigcehn"
             )
 
             port.onMessage.addListener((msg, port) => {
@@ -99,7 +99,15 @@
                 port.postMessage(JSON.parse(text1.value));
             }
         } else {
-            out1.value = ('no runtime found');
+            // Firefox
+            window.addEventListener('message', (event) => {
+                console.log("window:addEventListener");
+                console.log(JSON.stringify(event.data));
+            });
+
+            button.onclick = (event) => {
+                window.postMessage(JSON.parse(text1.value));
+            }
         }
     </script>
 </body>

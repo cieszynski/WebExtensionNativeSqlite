@@ -14,14 +14,15 @@
     You should have received a copy of the GNU General Public License
     along with WebExtensionNativeSqlite.  If not, see <http://www.gnu.org/licenses/>.
 */
-document.body.style.border = "5px solid red";
+
+// show, that the extension was loaded ...
+document.body.style.border = "5px solid blue";
 
 const out1 = document.getElementById('out1');
 const text2 = document.getElementById('text2');
 out1.value = "runtime found"
 
 const myPort = browser.runtime.connect({ name: "port-from-cs" });
-
 myPort.onMessage.addListener((msg) => {
     console.log("content:myPort.onMessage");
     text2.value = JSON.stringify(msg)

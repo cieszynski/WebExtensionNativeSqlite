@@ -33,7 +33,7 @@ async function getMessage() {
     const size = new Uint8Array(4);
     const raw = await Deno.stdin.read(size);
 
-    /* on reload or stopping the extension */
+    /* on reloading or stopping we will get NULL */
     if (raw === null) {
         Deno.exit(0)
     }
@@ -53,6 +53,13 @@ while (true) {
 
     try {
         const obj_in = JSON.parse(json_in);
+
+        /*
+            Everything outside of [all, get, run] is 
+            returned (e.g. as a reference or similar):
+        */
+        Object.assign(obj_out, obj_in);
+        
         const stmt = database.prepare(
             obj_in.all?.sql ??
             obj_in.get?.sql ??
