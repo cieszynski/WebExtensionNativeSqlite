@@ -15,11 +15,6 @@
     "permissions": [
         "nativeMessaging"
     ],
-    "externally_connectable": {
-        "matches": [
-            "file:///*"
-        ]
-    },
     "content_scripts": [
         {
             "matches": [
