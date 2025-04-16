@@ -109,7 +109,7 @@ Deno is used here to create a native application. Deno makes it possible to prog
     deno compile --allow-all --target x86_64-pc-windows-msvc --icon ./icons/webextension.ico -o denohost.exe ./denohost.mjs
 
     # Windows
-    deno.exe compile --allow-all -o .\denohost.exe --icon .\icons\webextension.ico .\denohost.mjs
+    deno.exe compile --allow-all -o .\denohost.exe --icon .\webextension.ico .\denohost.mjs
 
 How to load the extension for debugging in the individual browsers is described in the links at the end.
 
@@ -167,7 +167,7 @@ To test the extension, the file "webpage-all.html" is opened locally in a browse
         }
     }
 
-### run (Executes INSERT, UPDATE or DELETE)
+#### run (Executes INSERT, UPDATE or DELETE)
     {
         "ref": "ref3",
         "run": {
